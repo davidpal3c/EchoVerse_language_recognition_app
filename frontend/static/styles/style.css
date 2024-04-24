@@ -42,13 +42,44 @@ body {
     left: 0;
     width: 100%;
     padding: 1.3rem 10%;
-    background: rgba(0, 0, 0, .1);
-    backdrop-filter: blur(50px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100;
+    z-index: 50;
 }
+
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    z-index: -1;
+}
+
+/* Swinging light */
+/* .header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .1), transparent);
+    transition: .5s;
+}
+
+.header:hover::after {
+    left: 100%;
+} */
+/* */
+
+
+
 
 .logo-title {
     font-size: 2rem;
@@ -65,8 +96,14 @@ body {
 }
 
 
+#check {
+    display: none;
+}
+
+
 .icons {
     color: #fff;
+    right: 5%;
     font-size: 2.7rem;
     cursor: pointer;
     display: none;
@@ -83,9 +120,90 @@ body {
 
 @media (max-width: 768px) {
     .icons {
-        display: block;
+        display: inline-flex;
     }
+
+    #check:checked~.icons #menu-icon {
+        display: none;
+    } 
+
+    .icons #close-icon {
+        display: none;
+    }
+
+    #check:checked~.icons #close-icon {
+        display: block;
+    } 
+    
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background:  rgba(0, 0, 0, .1);
+        backdrop-filter: blur(50px);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+        overflow: hidden;
+        transition: .3s ease;
+
+    }
+
+    #check:checked~.navbar {
+        height: 17.7rem;
+    } 
+
+
+    .navbar a {
+        display: block;
+        font-size: 1.5rem 0;
+        margin: 1.5rem 0;
+        text-align: center;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: .3s ease;       
+    }
+
+    #check:checked~.navbar a {
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: calc(.15s * var(--i));
+    } 
+
 }
 
 
+.main-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    width: 100vw;
+    border: 1px solid black;
+}
+
+.echo-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75vw;
+    height: 50vh; /* Adjust height as needed */
+    border: 1px solid black;
+}
+
+
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 18rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(50px);
+    border: 1px solid black;
+    z-index: 999;
+}
 
