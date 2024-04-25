@@ -197,13 +197,66 @@ body {
     padding-bottom: 8rem;
 }
 
-.echo-box {
-    /* display: flex; */
+.echo-container {
     border-radius: 15.708px;
-    width: 65vw;
-    height: 50vh;
+    width: 70vw;
+    height: 55vh;
     border: 1px solid white;
-    /* margin-bottom: 1rem; */
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.nav-box {
+    height: 4.5em;
+    width: 100%;
+    border: 1px solid white;
+}
+
+
+/* grid program container */
+.grid-box {
+    height: 24em;
+    width: 100%;
+    border: 1px solid white;
+    display: grid;
+    
+}
+
+
+.input-select,
+.output-select {
+    height: 5rem;
+    width: 12rem;
+    border: 1px solid white;
+} 
+
+.input-box {
+    height: 5rem;
+    width: 12rem;
+    border: 1px solid white;
+}
+
+.output-box {
+    height: 8rem;
+    width: 12rem;
+    border: 1px solid white;
+}
+
+/* grid program container (end) */
+
+
+
+
+
+
+.echo-footer {
+    /* display: flex;
+    flex-direction: column;
+    justify-content:right;
+    align-self: center;
+    width: 100%; */
+    color: white;
 }
 
 
@@ -217,4 +270,11 @@ body {
     backdrop-filter: blur(50px);
     border: 1px solid white;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer p {
+    color: white;
 }
