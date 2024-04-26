@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aladin&family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 
 * {
@@ -9,7 +9,7 @@
     border: none;
     outline: none;
     scroll-behavior: smooth;
-    font-family: 'Montserrat';
+    font-family: 'KoHo';
 }
 
 :root {
@@ -31,7 +31,7 @@ html {
 
 body {
     min-height: 100vh;
-    background: url('/frontend/static/img/clear_wateraquamarinepurple_wavy_bac_2(1).jpg')no-repeat;
+    background: url('/frontend/static/img/johny-goerend-unsplash.jpg')no-repeat;
     background-size: cover;
     background-position: center;
 
@@ -72,6 +72,7 @@ body {
     z-index: -1;
 }
 
+
 /* Swinging light */
 /* .header::after {
     content: '';
@@ -91,26 +92,99 @@ body {
 
 
 
-
 .logo-title {
     font-size: 2rem;
     color: var(--second-text-color);
+
+}
+
+.logo-title > .letter {
+    display: inline-block;
+    transition: transform 120ms ease;
+}
+
+.logo-title > .letter {
+    transition-duration: 550ms;
+}
+
+.logo-title:hover > .letter:nth-child(1) {
+                /* -left-right+   -up-down+  */
+    transform: translate(-60%, -30%) rotate(-18deg);
+}
+
+.logo-title:hover > .letter:nth-child(2) {
+transform: translate(-20%, 20%) rotate(56deg);
+}
+
+.logo-title:hover > .letter:nth-child(3) {
+transform: translate(-5%, 70%) rotate(-6deg);
+}
+
+.logo-title:hover > .letter:nth-child(4) {
+transform: translate(-70%, -50%) rotate(-54deg);
+}
+
+.logo-title:hover > .letter:nth-child(5) {
+transform: translate(-25%, -20%) rotate(12deg);
+}
+
+.logo-title:hover > .letter:nth-child(6) {
+transform: translate(10%, 20%) rotate(-34deg);
+}
+
+.logo-title:hover > .letter:nth-child(7) {
+transform: translate(-10%, -40%) rotate(-5deg);
+}
+
+.logo-title:hover > .letter:nth-child(8) {
+transform: translate(190%, -55%) rotate(10deg);
+}
+
+.logo-title:hover > .letter:nth-child(9) {
+transform: translate(78%, 50%) rotate(-16deg);
 }
 
 
+
+
+
 .navbar a {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     color: var(--second-text-color);
     text-decoration: none;
     font-weight: 500;
     margin-left: 2.5rem;
+    text-decoration: none;
+    /* opacity: 0.2;  */
+    transition: opacity 0.2s ease; /* Smooth transition */
 }
+
+.navbar:hover a {
+    opacity: 0.2; /* Opacity for all links when the navbar is hovered */
+}
+
+.navbar a:hover {
+    opacity: 1; /* Full opacity for the hovered link */
+}
+
+.navbar a.dim {
+    opacity: 0.2;
+}
+
+/* .navbar .home:hover  {
+    color: rgb(31, 220, 233);
+}
+
+
+
+.navbar a:has(.home:hover) .word:not(.home:hover) {
+    opacity: 0.2;
+} */
 
 
 #check {
     display: none;
 }
-
 
 .icons {
     color: #fff;
@@ -204,6 +278,8 @@ body {
     border: 1px solid white;
     display: flex;
     flex-direction: column;
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(25px);   
     
 }
 
@@ -215,31 +291,42 @@ body {
 
 
 /* grid program container */
+
+.input-select { grid-area: input-select; }
+.input-box { grid-area: input-box; }
+.output-box { grid-area: output-box; }
+.output-select { grid-area: output-select; }
+
+
 .grid-box {
-    height: 24em;
+    height: 25.3em;
     width: 100%;
     border: 1px solid white;
     display: grid;
-    
+    grid-template-columns: repeat(4, 1fr); /* Adjusted to use fr units for responsive sizing */
+    grid-template-rows: auto;
+    grid-template-areas: 
+        'input-select input-box input-box output-select'
+        'input-select input-box input-box output-select'
+        'input-select output-box output-box output-box';
+    gap: .2em;
 }
 
+/* .grid-box > div {
+    text-align: left;
+    padding: 5px 0 1px 0 1px;
+} */
 
 .input-select,
 .output-select {
-    height: 5rem;
-    width: 12rem;
     border: 1px solid white;
 } 
 
 .input-box {
-    height: 5rem;
-    width: 12rem;
     border: 1px solid white;
 }
 
 .output-box {
-    height: 8rem;
-    width: 12rem;
     border: 1px solid white;
 }
 
