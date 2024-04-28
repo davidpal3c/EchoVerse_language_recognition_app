@@ -34,7 +34,7 @@ html {
 
 body {
     min-height: 100vh;
-    background: url('/frontend/static/img/jackson-hendry-unsplash.jpg')no-repeat;
+    background: url('/frontend/echolab/src/img/jackson-hendry-unsplash.jpg')no-repeat;
     background-size: cover;
     background-position: center;
 
