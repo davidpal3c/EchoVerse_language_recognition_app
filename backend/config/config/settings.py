@@ -2,9 +2,9 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-# BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -32,7 +32,8 @@ INSTALLED_APPS = [
     'dictionary',
     'speech_to_text',
     'text_to_speech',
-    'user_auth'
+    'user_auth',
+    # 'django-frontend',
 ]
 
 MIDDLEWARE = [
@@ -48,11 +49,12 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'config.urls'
 
 
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'core', 'templates')],  # Specifies the directory where Django will look for template files (base.html and other templates).
+                'DIRS': [
+                    os.path.join(BASE_DIR, 'core', 'templates')
+                    ], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,7 +76,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -106,24 +108,34 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
 
 
-# Path to static and other frontend assets
+
+# React app path of static files 
+REACT_APP_STATIC_DIR = os.path.join(BASE_DIR, 'frontend', 'src', 'static')
+
+
+# url prefix for static files
 STATIC_URL = '/static/'
 
 
 # Defines the directory where Django will collect static files during production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# additional directories from which Django collects static files
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend', 'build', 'static'),  # Path to React static files
+    REACT_APP_STATIC_DIR,
 ]
+
+#  STATICFILES_DIRS.append(os.path.join(BASE_DIR, 'public', 'static'))
+# STATICFILES_DIRS.append(os.path.join(REACT_APP_DIR, 'build', 'static'))
+
+# Collect static when ready to deploy
+# python manage.py collectstatic
 
 
 # Default primary key field type: https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
