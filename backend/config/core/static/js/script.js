@@ -1,7 +1,6 @@
 
 
 // explosive/decompose title function
-
 const decompose = id => {
     const element = document.getElementById(id),
         text = element.innerText.split("");
@@ -22,9 +21,7 @@ const decompose = id => {
 decompose("echoverse");
 
 
-
 // applies opacity to non-hovered links
-
 $('.navbar a').hover(
     function() {
         $('.navbar a').not(this).addClass('dim');
@@ -32,3 +29,5 @@ $('.navbar a').hover(
         $('.navbar a').removeClass('dim');
     }
 );
+
+

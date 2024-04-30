@@ -110,13 +110,11 @@ USE_TZ = True
 
 
 
-# React app path of static files 
 CORE_APP_DIR = os.path.join(BASE_DIR, 'core', 'static')
 
 
 # url prefix for static files
 STATIC_URL = '/static/'
-
 
 # Defines the directory where Django will collect static files during production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -126,11 +124,7 @@ STATICFILES_DIRS = [
     CORE_APP_DIR,
 ]
 
-#  STATICFILES_DIRS.append(os.path.join(BASE_DIR, 'public', 'static'))
-# STATICFILES_DIRS.append(os.path.join(REACT_APP_DIR, 'build', 'static'))
 
-# Collect static when ready to deploy
-# python manage.py collectstatic
 
 
 # Default primary key field type: https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
