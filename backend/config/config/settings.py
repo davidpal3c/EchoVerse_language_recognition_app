@@ -2,8 +2,7 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
-
+BASE_DIR = Path(__file__).resolve().parent.parent
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -29,9 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'dictionary',
-    'speech_to_text',
-    'text_to_speech',
     'user_auth',
     # 'django-frontend',
 ]
@@ -115,7 +111,7 @@ USE_TZ = True
 
 
 # React app path of static files 
-REACT_APP_STATIC_DIR = os.path.join(BASE_DIR, 'frontend', 'src', 'static')
+CORE_APP_DIR = os.path.join(BASE_DIR, 'core', 'static')
 
 
 # url prefix for static files
@@ -127,7 +123,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 STATICFILES_DIRS = [
-    REACT_APP_STATIC_DIR,
+    CORE_APP_DIR,
 ]
 
 #  STATICFILES_DIRS.append(os.path.join(BASE_DIR, 'public', 'static'))
