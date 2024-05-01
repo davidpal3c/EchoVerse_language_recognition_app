@@ -111,7 +111,7 @@ USE_TZ = True
 
 
 CORE_APP_DIR = os.path.join(BASE_DIR, 'core', 'static')
-
+STYLES_DIR = os.path.join(CORE_APP_DIR, 'styles')
 
 # url prefix for static files
 STATIC_URL = '/static/'
@@ -122,6 +122,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
     CORE_APP_DIR,
+    STYLES_DIR,
 ]
 
 
