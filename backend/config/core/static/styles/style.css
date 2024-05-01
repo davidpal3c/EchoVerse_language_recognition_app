@@ -312,13 +312,11 @@ transform: translate(78%, 50%) rotate(-16deg);
 
 
 
-.btn-box:hover {
-    /* background: rgba(0, 0, 0, .1); */
+/* .btn-box:hover {
     background: var(--second-btn-color);
     box-shadow: 0 0 1rem var(--second-btn-color);
-    /* backdrop-filter: blur(80px); */
     color: var(--btn-color);
-}
+} */
 
 .icon {
     /* font-size: 1rem; */
@@ -350,6 +348,13 @@ transform: translate(78%, 50%) rotate(-16deg);
 .btn-box a:hover {
     color: black;
 } */
+
+.active {
+    background-color: var(--second-btn-color);
+    color: var(--btn-color);
+    box-shadow: 0 0 1rem var(--second-btn-color);
+   
+}
 
 
 

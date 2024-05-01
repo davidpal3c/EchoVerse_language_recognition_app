@@ -8,7 +8,7 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{% static '/styles/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/styles/style.css' %}">
 
         <!-- box icons -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -38,8 +38,8 @@
         <main class="main-section">
             <div class="echo-container">
                 <div class="nav-box">
-                    <a class="btn-box" href="#" id="">Speech & Text Transducer</a>
-                    <a class="btn-box" href="#" id="">Dictionary</a>
+                    <a class="active btn-box" href="#" id="st-btn">Speech & Text Transducer</a>
+                    <a class="btn-box" href="#" id="dict-btn">Dictionary</a>
                     <i class="bi bi-folder2 icon" id="folder-btn"></i>
                     <!-- <i class="bx bx-log-in-circle icon" id="login-btn"></i> -->
                 </div>
@@ -47,9 +47,9 @@
                 <div class="grid-box">
                     <div class="input-select">
                         <p>Input: </p>
-                        <a href="" class="btn-box">Text</a>
-                        <a href="" class="btn-box">Speech</a>
-                        <a href="" class="btn-box">Language</a>                 
+                        <a href="#" class="btn-box" id="in-text-btn">Text</a>
+                        <a href="#" class="active btn-box" id="in-speech-btn">Speech</a>
+                        <a href="" class="btn-box" id="in-language">Language</a>                 
                     </div>
                     <div class="input-box">
                         <input type="text" class="input-text" placeholder="Type here...">
@@ -60,9 +60,9 @@
 
                     <div class="output-select">
                         <p>Output: </p>
-                        <a href="" class="btn-box">Text</a>
-                        <a href="" class="btn-box">Speech</a>
-                        <a href="" class="btn-box">Language</a> 
+                        <a href="#" class="active btn-box" id="out-text-btn">Text</a>
+                        <a href="#" class="btn-box" id="out-speech-btn" >Speech</a>
+                        <a href="" class="btn-box" id="out-language">Language</a> 
                     </div>
                     
                 </div>
