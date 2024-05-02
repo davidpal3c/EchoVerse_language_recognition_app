@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'user_auth',
-    'corsheaders'
+    'corsheaders',
+    'jazzmin'
     # 'django-frontend',
 ]
 
@@ -112,8 +113,8 @@ USE_TZ = True
 
 
 
-CORE_APP_DIR = os.path.join(BASE_DIR, 'core', 'static')
-STYLES_DIR = os.path.join(CORE_APP_DIR, 'styles')
+STATIC_PROJECT_DIR = os.path.join(BASE_DIR, 'static')
+STYLES_DIR = os.path.join(STATIC_PROJECT_DIR, 'styles')
 
 # url prefix for static files
 STATIC_URL = '/static/'
@@ -123,7 +124,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 STATICFILES_DIRS = [
-    CORE_APP_DIR,
+    STATIC_PROJECT_DIR,
     STYLES_DIR,
 ]
 

@@ -67,7 +67,7 @@ $('.navbar a').hover(
 );
 
 
-// toggle buttons (input & output btn functions)
+// toggle buttons (input & output btn functionality)
 
 const toggleButtons = (target) => {
     const type = target.dataset.toggle;
@@ -101,6 +101,7 @@ const toggleButtons = (target) => {
     
         
         if (value === 'speech' && inputTxtField && inputTxtField.parentNode) {
+            
             inputTxtField.parentNode.removeChild(inputTxtField); // Remove inputField using its parent node
 
             const newSpeechElement = document.createElement('div');
@@ -156,7 +157,8 @@ const toggleButtons = (target) => {
             newTextElement.setAttribute('type', 'text');
             newTextElement.setAttribute('class', 'output-text');
             newTextElement.setAttribute('id', 'out-txt-field');
-            newTextElement.setAttribute('placeholder', 'Type anything here...');
+            newTextElement.setAttribute('value', 'Output');
+            newTextElement.setAttribute('disabled', '');
             console.log(newTextElement);
 
             outputBox.appendChild(newTextElement);

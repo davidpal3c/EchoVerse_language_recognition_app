@@ -467,9 +467,10 @@ transform: translate(78%, 50%) rotate(-16deg);
 .input-box {
     border: 1px solid var(--border);
     padding: 0.6rem;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
+        
+        /* display: flex;
+        align-items: center;
+        justify-content: center; */
 }
 
 
@@ -494,7 +495,7 @@ transform: translate(78%, 50%) rotate(-16deg);
 
 .input-box .input-speech {
     border-radius: .5rem;
-    background-color: rgba(172, 240, 206, 0.5);
+    background-color: rgba(132, 157, 180, 0.5);
     color: black;
     font-size: 1rem;
     width: 100%;
@@ -535,7 +536,7 @@ transform: translate(78%, 50%) rotate(-16deg);
 
 .output-box .output-speech {
     border-radius: .5rem;
-    background-color: rgba(172, 240, 206, 0.5);
+    background-color: rgba(132, 157, 180, 0.5);
     color: black;
     font-size: 1rem;
     width: 100%;
