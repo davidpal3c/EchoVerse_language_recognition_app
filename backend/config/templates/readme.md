@@ -1,0 +1,1 @@
+Templates shared across different apps or the entire project.

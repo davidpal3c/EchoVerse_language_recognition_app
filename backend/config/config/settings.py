@@ -27,14 +27,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'core',
     'user_auth',
+    'corsheaders',
+    'jazzmin',
     # 'django-frontend',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -62,6 +66,9 @@ TEMPLATES = [
         },
     },
 ]
+
+APPEND_SLASH = True
+
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -110,8 +117,8 @@ USE_TZ = True
 
 
 
-CORE_APP_DIR = os.path.join(BASE_DIR, 'core', 'static')
-STYLES_DIR = os.path.join(CORE_APP_DIR, 'styles')
+STATIC_PROJECT_DIR = os.path.join(BASE_DIR, 'static')
+STYLES_DIR = os.path.join(STATIC_PROJECT_DIR, 'styles')
 
 # url prefix for static files
 STATIC_URL = '/static/'
@@ -121,7 +128,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 STATICFILES_DIRS = [
-    CORE_APP_DIR,
+    STATIC_PROJECT_DIR,
     STYLES_DIR,
 ]
 
