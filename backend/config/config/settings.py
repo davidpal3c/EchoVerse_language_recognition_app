@@ -27,10 +27,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'django_extensions',
     'core',
     'user_auth',
-    'corsheaders',
+
     # 'django-frontend',
 ]
 
@@ -77,8 +78,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'detn6lnag9smmv',
+        'USER': 'ueb39v3c3lv8o9',
+        'PASSWORD': 'pa9dbf40fd8a40c082635fae65456b7e34b3605690842d20c8f62117a47fdbf7d',
+        'HOST': 'c1v04v8krpfbct.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
