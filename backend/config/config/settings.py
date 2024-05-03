@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     'core',
     'user_auth',
     'corsheaders',
-    'jazzmin',
     # 'django-frontend',
 ]
 
