@@ -2,8 +2,7 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
-
+BASE_DIR = Path(__file__).resolve().parent.parent
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -28,17 +27,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'core',
-    'dictionary',
-    'speech_to_text',
-    'text_to_speech',
     'user_auth',
+    'corsheaders',
+    'jazzmin',
     # 'django-frontend',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -66,6 +66,9 @@ TEMPLATES = [
         },
     },
 ]
+
+APPEND_SLASH = True
+
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -114,27 +117,22 @@ USE_TZ = True
 
 
 
-# React app path of static files 
-REACT_APP_STATIC_DIR = os.path.join(BASE_DIR, 'frontend', 'src', 'static')
-
+STATIC_PROJECT_DIR = os.path.join(BASE_DIR, 'static')
+STYLES_DIR = os.path.join(STATIC_PROJECT_DIR, 'styles')
 
 # url prefix for static files
 STATIC_URL = '/static/'
-
 
 # Defines the directory where Django will collect static files during production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 STATICFILES_DIRS = [
-    REACT_APP_STATIC_DIR,
+    STATIC_PROJECT_DIR,
+    STYLES_DIR,
 ]
 
-#  STATICFILES_DIRS.append(os.path.join(BASE_DIR, 'public', 'static'))
-# STATICFILES_DIRS.append(os.path.join(REACT_APP_DIR, 'build', 'static'))
 
-# Collect static when ready to deploy
-# python manage.py collectstatic
 
 
 # Default primary key field type: https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
