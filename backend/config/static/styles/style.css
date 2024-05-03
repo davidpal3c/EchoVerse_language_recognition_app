@@ -311,12 +311,12 @@ transform: translate(78%, 50%) rotate(-16deg);
 }
 
 
-
-/* .btn-box:hover {
-    background: var(--second-btn-color);
-    box-shadow: 0 0 1rem var(--second-btn-color);
+.btn-box:hover {
+    background: var(--third-text-color);
+    /* box-shadow: 0 0 1rem var(--second-btn-color); */
     color: var(--btn-color);
-} */
+}
+
 
 .icon {
     /* font-size: 1rem; */
@@ -361,18 +361,18 @@ transform: translate(78%, 50%) rotate(-16deg);
 /* section containers */
 
 .echo-container {
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(25px);   
+    box-shadow: 0 0 1.3rem var(--second-btn-color);
     border-radius: 0.9rem;
     margin-top: 2rem;
     width: 50rem;
     height: 30rem;
-    border: 1px solid var(--border);
+
+
     display: flex;
     flex-direction: column;
-    /* background: var(--second-bg-color); */
-    background: rgba(0, 0, 0, .1);
-    backdrop-filter: blur(25px);   
-    /* background: transparent; */
-    
+    /* background: transparent; */    
 }
 
 
@@ -402,7 +402,6 @@ transform: translate(78%, 50%) rotate(-16deg);
 .grid-box {
     height: 23rem;
     width: 100%;
-    border: 1px solid var(--border);
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* Adjusted to use fr units for responsive sizing */
     grid-template-rows: auto;
@@ -412,7 +411,6 @@ transform: translate(78%, 50%) rotate(-16deg);
         'input-select output-box output-box output-box'
         'input-select output-box output-box output-box';
     gap: .2em;
-    overflow: auto;
 }
 
 /* .grid-box > div {
@@ -583,3 +581,257 @@ transform: translate(78%, 50%) rotate(-16deg);
 footer p {
     color: white;
 }
+
+
+
+
+
+/* USER AUTH CONTANER */
+
+
+.user-auth-box {
+    /* border: 1px solid var(--border); */
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(25px);  
+    box-shadow: 0 0 1.3rem var(--second-btn-color);
+    border-radius: 0.9rem;
+    height: 27rem;
+    margin-top: 4rem;
+    width: 23rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.rAuth-box {
+    /* border: 1px solid var(--border); */
+    width: calc(100% - 3rem);
+    height: calc(100% - 5.7rem);
+    padding: 1rem;
+}
+
+.rAuth-box form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.rAuth-box h1 {
+    text-align: center;
+    color: var(--second-text-color);
+    margin-bottom: 1rem;
+}
+
+.user-input {
+    border-radius: .9rem;
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);   
+    color: var(--second-text-color);
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    width: 16rem;
+    height: 3.5rem;
+    padding: 0.5rem;
+    text-align: start;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-input .login-field {
+    border-radius: .5rem;
+    background-color: rgba(132, 157, 180, 0.5);
+    color: var(--third-text-color);
+    font-size: 1rem;
+    width: 12rem;
+    height: 2rem;
+    margin-right: .4rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0.5rem;
+    text-align: start;
+}
+
+
+.icon2 {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    background: var(--second-btn-color);
+    border: .1rem solid var(--border);
+    border-radius: 50%;
+    box-shadow: 0 0 .2rem var(--second-btn-color);
+    color: var(--btn-color);
+    width: 2rem;
+    height: 2rem;
+    size: 5rem;
+    transition: .5s ease;
+}
+
+.checkbox-wrapper-2 {
+    color: var(--second-text-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0.2rem 0.5rem 0.2rem 0;
+    /* border: 1px solid white; */
+
+}
+
+.checkbox-wrapper-2 .ikxBAC {
+    appearance: none;
+    background-color: #dfe1e4;
+    border-radius: 72px;
+    border-style: none;
+    flex-shrink: 0;
+    height: 20px;
+    /* margin-top: 0.2rem; */
+    position: relative;
+    width: 30px;
+    margin-right: 0.5rem;
+}
+
+.checkbox-wrapper-2 .ikxBAC::before {
+    bottom: -6px;
+    content: "";
+    left: -6px;
+    position: absolute;
+    right: -6px;
+    top: -6px;
+}
+
+.checkbox-wrapper-2 .ikxBAC,
+.checkbox-wrapper-2 .ikxBAC::after {
+    transition: all 100ms ease-out;
+}
+
+.checkbox-wrapper-2 .ikxBAC::after {
+    background-color: #fff;
+    border-radius: 50%;
+    content: "";
+    height: 14px;
+    left: 3px;
+    position: absolute;
+    top: 3px;
+    width: 14px;
+}
+
+.checkbox-wrapper-2 input[type=checkbox] {
+    cursor: default;
+}
+
+.checkbox-wrapper-2 .ikxBAC:hover {
+    background-color: #c9cbcd;
+    transition-duration: 0s;
+    transition: 0.7s ease;
+}
+
+.checkbox-wrapper-2 .ikxBAC:checked {
+    background-color: #6e79d6;
+    transition: 0.2s ease;
+}
+
+.checkbox-wrapper-2 .ikxBAC:checked::after {
+    background-color: #fff;
+    left: 13px;
+}
+
+.checkbox-wrapper-2 :focus:not(.focus-visible) {
+    outline: 0;
+}
+
+.checkbox-wrapper-2 .ikxBAC:checked:hover {
+    background-color: #535db3;
+    transition: 0.2s ease;
+}
+
+
+
+.remember-forgot {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.remember-forgot a {
+    margin-top: 0.22rem;
+
+}
+
+
+.remember-forgot a,
+.register-link a {
+    color: var(--second-btn-color);
+    font-weight: 550;
+}
+
+
+.register-link {
+    color: var(--second-text-color);
+}
+
+.rAuth-box button {
+    border: 1.5px solid var(--border);
+    background-color: var(--third-text-color);
+    padding: 0.5rem 1.2rem;
+    text-align: center;
+    border-radius: 0.7rem;
+    text-decoration: none;
+    transition: 0.8s ease;
+    color:black;
+    margin-top: 0.2rem;
+    margin-bottom: 0.7rem;
+}
+
+.rAuth-box button:hover {
+    border: 1.5px solid var(--border);
+    background-color: var(--third-text-color);
+    padding: 0.5rem 1.2rem;
+    text-align: center;
+    border-radius: 0.7rem;
+    text-decoration: none;
+    transition: 0.8s ease;
+    color:black;
+    margin-top: 0.2rem;
+    margin-bottom: 0.7rem;
+}
+
+
+.user-auth-box hr {
+    margin-top: 1rem;
+    border: 0.05rem solid var(--border);
+}
+
+/* OAuth button */
+
+.oauth-login-btn button {
+
+    border-radius: 10%;
+    padding: 0.4rem;
+    background-color: #4285F4;
+    color: var(--second-text-color);
+    margin-top: .6rem;
+    cursor: pointer;
+    transition: 0.7s ease;
+}
+
+.oauth-login-btn button:hover {
+    border-radius: 10%;
+    padding: 0.4rem;
+    background-color: var(--second-text-color);
+    color: #4285F4;
+    margin-top: .6rem;
+    cursor: pointer;
+    transition: 0.7s ease;
+}
+
+
+
