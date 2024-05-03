@@ -31,7 +31,11 @@ INSTALLED_APPS = [
     'core',
     'user_auth',
     'corsheaders',
+<<<<<<< HEAD
     'jazzmin',
+=======
+    'jazzmin'
+>>>>>>> 31840c21ff1ad37e4c2707d1300e7b33751718d3
     # 'django-frontend',
 ]
 
