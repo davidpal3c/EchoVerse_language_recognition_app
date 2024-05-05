@@ -1,0 +1,51 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %} {{ user.username }} {% endblock %}
+
+{% block content % }
+
+<main class="main-section">
+    <div class="echo-container">
+        <div class="nav-box">
+            <p>Welcome, {{ user.username }}</p>
+            <a class="active btn-box toggle-btn" href="#" id="st-btn" data-toggle="type" data-value="s&t">Speech & Text Transducer</a>
+            <a class="btn-box toggle-btn" href="#" id="dict-btn" data-toggle="type" data-value="dict">Dictionary</a>
+            <i class="bi bi-folder2 icon toggle-btn" id="folder-btn"></i>
+            <p>Bio: {{ user.bio }}</p>
+            <p>Birth Date: {{ user.birth_date }}</p>
+            <!-- <i class="bx bx-log-in-circle icon" id="login-btn"></i> -->
+        </div>
+
+        <div class="grid-box">
+            <div class="input-select">
+                <p>Input: </p>
+                <a href="#" class="active btn-box toggle-btn" id="in-text-btn" data-toggle="input" data-value="text">Text</a>
+                <a href="#" class=" btn-box toggle-btn" id="in-speech-btn" data-toggle="input" data-value="speech">Speech</a>
+                <a href="" class="btn-box toggle-btn" id="in-language">Language</a>                 
+            </div>
+            <div class="input-box">
+                <input type="text" class="input-text" id="in-txt-field" placeholder="Type anything here...">
+            </div>
+            <div class="output-box">
+                <input type="text" class="output-text" id="out-txt-field" value="Output" disabled>
+            </div>
+
+            <div class="output-select">
+                <p>Output: </p>
+                <a href="#" class="active btn-box toggle-btn" id="out-text-btn" data-toggle="output" data-value="text">Text</a>
+                <a href="#" class="btn-box toggle-btn" id="out-speech-btn" data-toggle="output" data-value="speech">Speech</a>
+                <a href="" class="btn-box toggle-btn" id="out-language">Language</a> 
+            </div>
+            
+        </div>
+        <div class="echo-footer">
+            <!-- Add to Favorites -->
+            <i class="bi bi-bookmark icon" id="bookmark-btn"></i>   
+            <!-- Download as File -->
+            <i class="bi bi-download icon" id="download-btn"></i>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

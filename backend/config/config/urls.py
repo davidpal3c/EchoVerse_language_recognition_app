@@ -22,11 +22,17 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include('core.urls')),
-    path("", include('user_auth.urls')),
-    path("", include('django.contrib.auth.urls'))   #set prebuild url to automatically do login-logout-password reset: need to write html templates for them (empty). 
+    path('', include('core.urls')),
+    path('', include('user_auth.urls')),
+    
+    # path('home', include('core.urls')),
 
+    # path('', include('django.contrib.auth.urls'))   
+    # #set prebuild url to automatically do login-logout-password reset: 
+    # # Need to write html templates for them (empty) to work.
+    # # Reg folder close 
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
