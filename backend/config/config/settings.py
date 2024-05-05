@@ -34,6 +34,12 @@ INSTALLED_APPS = [
     # 'django-frontend',
 ]
 
+
+# Set user model as default user model
+AUTH_USER_MODEL = 'user_auth.CustomUser'
+
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -138,4 +144,4 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# AUTH_USER_MODEL = 'user_auth.CustomUser'
+

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib import admin
 
 app_name = "user_auth"
 
@@ -10,3 +11,8 @@ urlpatterns = [
 ]
 
 
+
+
+admin.site.index_title = 'Management Dashboard'
+admin.site.site_header = 'Echoverse Admin'
+admin.site.site_title = 'Mgmt App'

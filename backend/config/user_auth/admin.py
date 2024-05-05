@@ -1,11 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
+from .models import User
 
-# admin.site.register(CustomUser)
+admin.site.register(User)
 
-# class CustomUserAdmin(UserAdmin):
-#     model = CustomUser
-#     fieldsets = UserAdmin.fieldsets + (
-#         (None, {'fields': ('bio', 'birth_date')}),
-#     )
