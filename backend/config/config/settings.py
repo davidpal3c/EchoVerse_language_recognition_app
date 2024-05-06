@@ -1,15 +1,17 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+dotenv_path = os.path.join(BASE_DIR, '.env')
+
+# Load environment variables from .env file
+load_dotenv(dotenv_path)
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-me76arm8&#8sf8240dxa0-b9gj3#ip#473=ezeqh566s0b0it^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -35,8 +37,8 @@ INSTALLED_APPS = [
 ]
 
 
-# Set user model as default user model
-AUTH_USER_MODEL = 'user_auth.CustomUser'
+
+AUTH_USER_MODEL = 'user_auth.User'
 
 
 
@@ -81,10 +83,26 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
+# DATABASES = {
+#     'default': {
+#     'ENGINE':'django.db.backends.postgresql',
+#     'NAME': 'd2st6dombm4irh',
+#     'USER': 'uaqgmgb50uk9e4',
+#     'PASSWORD': 'pcd2a5f3a2671682ae3513382d6476f9b2b22d11c5fc7c7914ea955683c5a12b9',
+#     'HOST': 'ce1r1ldap2qd4b.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
+#     'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'ENGINE':'django.db.backends.postgresql',
+    'NAME': os.getenv('DB_NAME'),
+    'USER': os.getenv('DB_USER'),
+    'PASSWORD': os.getenv('DB_PASSWORD'),
+    'HOST': os.getenv('DB_HOST'),
+    'PORT': os.getenv('DB_PORT'),
     }
 }
 
