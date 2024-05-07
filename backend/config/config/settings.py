@@ -84,17 +84,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#     'ENGINE':'django.db.backends.postgresql',
-#     'NAME': 'd2st6dombm4irh',
-#     'USER': 'uaqgmgb50uk9e4',
-#     'PASSWORD': 'pcd2a5f3a2671682ae3513382d6476f9b2b22d11c5fc7c7914ea955683c5a12b9',
-#     'HOST': 'ce1r1ldap2qd4b.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
-#     'PORT': '5432',
-#     }
-# }
-
 DATABASES = {
     'default': {
     'ENGINE':'django.db.backends.postgresql',
