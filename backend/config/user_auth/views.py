@@ -3,24 +3,46 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 
-# Create your views here.
 def user_login(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+    if request.method == "POST":
+        email = request.POST["email"]
+        password = request.POST["password"]
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('core/index.html')
+            messages.success(request, ("Welcome! You have successfully logged in."))
+            return redirect('home')
+           
         else:
-            messages.error(request, 'Invalid username or password.')
+            messages.error(request, ("Error Logging In. Please Try Again..."))
+            return redirect('user_auth:login')
 
-    return render(request, 'userauths/login.html')
+    else:
+        return render(request, 'userauths/login.html')
 
 
-def user_logout(request):
-    logout(request)
-    return redirect('userauths/login.html')
+
+
+
+
+
+# def user_login(request):
+#     if request.method == 'POST':
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
+#         user = authenticate(request, email=email, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return redirect('core/index.html')
+#         else:
+#             messages.error(request, 'Invalid username or password.')
+
+#     return render(request, 'userauths/login.html')
+
+
+# def user_logout(request):
+#     logout(request)
+#     return redirect('userauths/login.html')
 
 
 

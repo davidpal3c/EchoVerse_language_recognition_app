@@ -26,6 +26,24 @@ const decompose = id => {
 decompose("echoverse");
 
 
+
+// Function to message element after a delay
+
+function hideMessage() {
+    var element = document.getElementById('msg');
+    if (element) {
+        element.classList.add('hidden');
+        setTimeout(function() {
+            element.style.display = 'none';
+        }, 500);
+    }
+}
+
+let delayInMilliseconds = 3300;
+setTimeout(hideMessage, delayInMilliseconds);
+
+
+
 // Applies opacity to non-hovered links
 
 // // Select all anchor elements within the navbar

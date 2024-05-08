@@ -23,11 +23,13 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
-    path('', include('user_auth.urls')),
-    
-    # path('home', include('core.urls')),
+    path('members/', include('user_auth.urls', namespace='user_auth')),
 
-    # path('', include('django.contrib.auth.urls'))   
+    path('members/', include('django.contrib.auth.urls')),
+
+   
+    # path('home', include('core.urls')),
+       
     # #set prebuild url to automatically do login-logout-password reset: 
     # # Need to write html templates for them (empty) to work.
     # # Reg folder close 

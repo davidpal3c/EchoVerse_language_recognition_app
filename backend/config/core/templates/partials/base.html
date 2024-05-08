@@ -20,7 +20,7 @@
     </head>
     <body>
         <header class="header">
-            <a class="logo-title" id="echoverse" href="/backend/config/core/templates/core/base.html" target="_self">EchoVerse</a>
+            <a class="logo-title" id="echoverse" href="{% url 'home' %}" target="_self">EchoVerse</a>
             <img src="" alt="" class="logo-img">
 
             <input type="checkbox" id="check">
@@ -34,7 +34,19 @@
                 <a href="{% url 'user_auth:login' %}" style="--i:1;" class="word login">Login</a>
                 <a href="{% url 'about' %}" style="--i:2;" class="word about">About</a>
             </nav>
+
         </header>
+
+        <div class="msg-box" id="msg">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
 
         {% block content %}
 

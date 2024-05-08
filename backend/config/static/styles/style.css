@@ -286,7 +286,7 @@ transform: translate(78%, 50%) rotate(-16deg);
     justify-content: center;
     align-items: center;
     /* border: 1px solid white; */
-    margin-top: 5.1rem;
+    /* margin-top: 3rem; */
     height: 60vh;  
     padding-bottom: 8rem;
 }
@@ -365,7 +365,7 @@ transform: translate(78%, 50%) rotate(-16deg);
     backdrop-filter: blur(25px);   
     box-shadow: 0 0 1.3rem var(--second-btn-color);
     border-radius: 0.9rem;
-    margin-top: 2rem;
+    margin-top: 3.1rem;
     width: 50rem;
     height: 30rem;
 
@@ -602,6 +602,7 @@ footer p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
 .rAuth-box {
@@ -835,3 +836,52 @@ footer p {
 
 
 
+
+.msg-box {
+    transition: opacity 0.5s ease; 
+    opacity: 1;
+}
+
+
+.hidden {
+    opacity: 0; 
+    pointer-events: none;
+}
+
+
+.msg-box .messages {
+    margin-top: 4.8rem;
+    /* z-index: 2000; */
+}
+
+.msg-box .messages li { 
+    padding: 2rem;
+    margin-bottom: .5rem;
+    height: 1rem;
+    width: 50%;
+    border-radius: 5px;
+    color: var(--third-text-color);
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(25px);  
+    z-index: 1000;
+}
+
+.msg-box .message .success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.msg-box .message .error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.msg-box .message .warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.msg-box .message .info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}

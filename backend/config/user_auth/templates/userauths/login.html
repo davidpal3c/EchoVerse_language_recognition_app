@@ -12,12 +12,12 @@
                 {% csrf_token %}
                 <h1>Login</h1>
                 <div class="user-input">
-                    <input type="text" class="login-field" placeholder="Email" required>
+                    <input type="text" class="login-field" name="email" placeholder="Email" required>
                     <!-- <i class="bi bi-person-circle"></i> -->
                     <i class="bi bi-person-fill icon2"></i>
                 </div>
                 <div class="user-input">
-                    <input type="password" class="login-field" placeholder="Password" required>
+                    <input type="password" class="login-field" name="password" placeholder="Password" required>
                     <i class="bi bi-lock-fill icon2"></i>
                 </div>
 
@@ -41,8 +41,6 @@
                 <button class="btn btn-primary" type="submit"><i class="bi bi-google"> Sign in with Google</i></button>
             </div>
         </div>
-
-        
     </div>
 </div>
 
