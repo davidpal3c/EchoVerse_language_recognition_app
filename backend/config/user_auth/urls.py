@@ -5,9 +5,10 @@ from django.contrib import admin
 app_name = "user_auth"
 
 urlpatterns = [
-    path("login", views.user_login, name="login"),
+    path("login", views.login_user, name="login"),
     # path("sign-up", views.registerView, name="sign-up")
     # path("user-profile", views.userProfile, name="user-in")
+    path("logout", views.logout_user, name='logout'),
 ]
 
 
