@@ -36,7 +36,8 @@
                 {% if user.is_authenticated  %}
                     <a href="{% url 'user_auth:logout' %}" style="--i:1;" class="word login">Logout</a>
                 {% else %}
-                    <a href="{% url 'user_auth:login' %}" style="--i:1;" class="word login">Login</a>
+                    <a href="{% url 'user_auth:login' %}" style="--i:1;" class="word logout">Login</a>
+                    <a href="{% url 'user_auth:register_user' %}" style="--i:1;" class="word register-user">Register</a>
                 {% endif %}                
             </nav>
 

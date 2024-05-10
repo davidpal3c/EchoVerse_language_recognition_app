@@ -1,0 +1,40 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %} Register {% endblock %}
+
+{% block content %}
+
+<div class="main-section">
+    <div class="user-auth-box">
+        <div class="rAuth-box">
+
+            {% if form.errors %}
+                <p>There was an error with your form...</p>
+            {% endif %}
+
+            <form method="post" action="{% url 'user_auth:register_user' %}">
+                {% csrf_token %}
+                <h1>Register</h1>
+                <div class="user-input">
+                    <input type="text" class="login-field" name="email" placeholder="Email" required>
+                    <!-- <i class="bi bi-person-circle"></i> -->
+                    <i class="bi bi-person-fill icon2"></i>
+                </div>
+                <div class="user-input">
+                    <input type="password" class="login-field" name="password" placeholder="Enter a Password" required>
+                    <i class="bi bi-lock-fill icon2"></i>
+                </div>
+                <div class="user-input">
+                    <input type="password" class="login-field" name="password" placeholder="Confirm Password" required>
+                    <i class="bi bi-lock-fill icon2"></i>
+                </div>
+                <button type="submit" class="login-btn">Sign-Up</button>
+            </form>
+            <hr>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
