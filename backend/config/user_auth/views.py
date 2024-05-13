@@ -1,9 +1,39 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import RegistrationForm
+from .forms import RegisterForm, LoginForm
+from django.views.generic import CreateView, FormView
+
+
+from .models import User
+
 
 # from django.contrib.auth.forms import UserCreationForm
+
+
+# def login_user(request):
+#     # form = LoginForm(request.POST or None)
+#     # context = {"form": form}
+
+#     # next_ = request.GET.get('next')
+#     # next_post = request.POST.get('next')
+#     # redirect_path = next_ or next_post or None
+#     if request.method == "POST":
+#         email = request.POST["email"]
+#         password = request.POST["password"]
+#         user = authenticate(request, email=email, password=password)
+#         if user is not None:
+#             login(request, user)
+#             messages.success(request, ("Welcome! You have successfully logged in."))
+#             return redirect('home')
+           
+#         else:
+#             messages.error(request, ("Error Logging In. Please Try Again..."))
+#             return redirect('user_auth:login')
+
+#     else:
+#         return render(request, 'userauths/login.html')
+
 
 
 def login_user(request):
@@ -31,50 +61,48 @@ def logout_user(request):
     return redirect('home')
 
 
+ 
+class RegisterView(CreateView):
+    form_class = RegisterForm
+    template_name = 'userauths/register.html'
+    success_url = '/'
 
-def register_user(request):
-    if request.method == "POST":
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.save()
-
-            login(request, user)
-            messages.success(request, ("Registration Successful!"))
-            
-            return redirect('home')
-        
-    else:  
-        form = RegistrationForm()
-
-
-    return render(request, 'userauths/register.html', {
-        'form':form,
-    })
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        user = form.save()
+        login(self.request, user)
+        messages.success(self.request, f"Welcome {user.email}")
+        return response
 
 
 
-
+# # ORIGINAL
 # def register_user(request):
+#     form = RegisterForm(request.POST or None)
+#     context = {"form": form}
+
+#     if form.is_valid():
+#         form.save()
+
+#     return render(request, 'userauths/register.html', context)
+
 #     if request.method == "POST":
-#         form = UserCreationForm(request.POST)
+#         form = RegistrationForm(request.POST)
 #         if form.is_valid():
-#             form.save()
-#             email = form.cleaned_data['email']
-#             password = form.cleaned_data['password1']
-#             user = authenticate(email=email, password=password)
+#             user = form.save(commit=False)
+#             user.set_password(form.cleaned_data['password'])
+#             user.save()
+
 #             login(request, user)
 #             messages.success(request, ("Registration Successful!"))
-            
 #             return redirect('home')
         
 #     else:  
-#         form = UserCreationForm()
-
+#         form = RegistrationForm()
 
 #     return render(request, 'userauths/register.html', {
 #         'form':form,
 #     })
+
+
 

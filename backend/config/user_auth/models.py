@@ -1,64 +1,114 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser     # later add
-from django.contrib.auth.validators import UnicodeUsernameValidator     # later add
-
-from django.contrib.auth.models import UserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
 
+# from django.contrib.auth.decorators import login_required   # later add 
+# from django.contrib.auth.models import AbstractUser     # later add
+# from django.contrib.auth.validators import UnicodeUsernameValidator     # later add
 
-class CustomUserManager(UserManager):
-    def _create_user(self, email, password, **extra_fields):
+
+class UserManager(BaseUserManager):
+    def create_user(self, email, full_name=None, password=None, is_active=True, is_staff=False, is_admin=False):         
+    # takes in REQUIRED_FIELDS + extra attributes to define object
         if not email:
-            raise ValueError("Provide a valid e-mail address")
-        
-        email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
+            raise ValueError("Users must have an email address")
+        elif not password:
+            raise ValueError("Users must have a password")
+        # elif not full_name:
+        #     raise ValueError("Users must have a full name")   
 
-        return user 
 
-    def create_user(self, email=None, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', False)
-        extra_fields.setdefault('is_superuser', False)
+        user_obj = self.model(
+            email = self.normalize_email(email),
+            full_name = full_name
+        )
 
-        return self._create_user(email, password, **extra_fields)
+        user_obj.set_password(password)
+        user_obj.active = is_active
+        user_obj.staff = is_staff
+        user_obj.admin = is_admin
+        user_obj.save(using=self._db)
+        return user_obj
     
-    def create_superuser(self, email=None, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        return self._create_user(email, password, **extra_fields)
-    
+    def create_staffUser(self, email, full_name=None, password=None):
+        user_obj = self.create_user(
+            email,
+            full_name,
+            password=password,
+            is_active=True,
+            is_staff=True,
+            is_admin=False
+        )
+        return user_obj
 
-class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(blank=True, default='', unique=True)
-    name = models.CharField(max_length=255, blank=True, default='')
-
-    is_superuser = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-
-    date_joined = models.DateTimeField(default=timezone.now)
-    last_login = models.DateTimeField(blank=True, null=True)
-
-    objects = CustomUserManager() #points to UserManager created
-                            # and when using user.objects.all() to get all of the users, 
-                            # it would use this class (CustomUserManager) instead of the built-in one in django
-
-    USERNAME_FIELD = 'email'          # specifies which field the username is
-    EMAIL_FIELD = 'email'             # specifies which field is the email field
-    REQUIRED_FIELDS = []               # sets which fields would be required
+    def create_superuser(self, email, full_name=None, password=None):
+        user_obj = self.create_user(
+            email,
+            full_name,
+            password=password,
+            is_active=True,
+            is_staff=True,
+            is_admin=True
+        )
+        return user_obj
 
 
-    class Meta:
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
 
-    
+class User(AbstractBaseUser):
+    email           = models.EmailField(max_length=255, unique=True)
+    full_name       = models.CharField(max_length=255, blank=True, null=True)
+    active          = models.BooleanField(default=True)   # can login
+    staff           = models.BooleanField(default=False)
+    admin           = models.BooleanField(default=False)
+    timestamp       = models.DateTimeField(auto_now=True)
+    is_active       = models.BooleanField(default=True)    
+ 
+    # confirm_email      = models.BooleanField(default=False)
+    # confirmed_date     = models.DateTimeField(default=False)
+
+
+    USERNAME_FIELD  = 'email'
+    REQUIRED_FIELDS = []           # 'full_name' , first / last, employe ID, etc..
+                               # email and password are set required by default    
+                                # would be called when 'createsuperuser' is run: 
+
+    objects = UserManager()
+
+
+    def __str__(self):
+        return self.email
+
     def get_full_name(self):
-        return self.name
+        if self.full_name:
+            return self.full_name
+        return self.email
     
     def get_short_name(self):
-        return self.name or self.email.split('@')[0]        # ..or user first value [0] as short name
-        
+        return self.email           # can be other declared attribute (ie. name, etc)
     
+
+    def has_perm(self, perm, obj=None):
+        return True
+    
+
+    def has_module_perms(self, app_label):
+        return True
+
+
+    @property
+    def is_staff(self):
+        return self.staff
+    
+    @property
+    def is_admin(self):
+        return self.admin
+
+    @property
+    def is_active(self):
+        return self.active
+    
+
+
+# class Profile(models.Model):
+#     user    = models.OneToOneField(User)
+    # extend (could be in a different app too, to handle extra user data)
