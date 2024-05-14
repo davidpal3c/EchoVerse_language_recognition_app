@@ -33,6 +33,9 @@
 
 
                 <button type="submit" class="login-btn">Sign-Up</button>
+                <div class="register-link">
+                    <p>Already have an account? <a href="{% url 'user_auth:login' %}">Login</a></p>
+                </div>
                 <!-- <hr> -->
                 {% if form.non_field_errors %}
                     <div class="errorlist">
