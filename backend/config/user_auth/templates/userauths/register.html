@@ -5,20 +5,29 @@
 
 {% block content %}
 
-<div class="main-section">
-    <div class="user-auth-box">
+<div class="main-section" id="app-container">
+    <div class="user-auth-box" >
         <div class="rAuth-box">
-            
-            {% if form.non_field_errors %}
-                <div class="alert alert-danger">
-                    {% for error in form.non_field_errors %}
-                        <p>{{ error }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-            <form method="post" action="{% url 'user_auth:register_user' %}">
+            <form method="post" action="{% url 'user_auth:register_user' %}" id="reg-form">
                 {% csrf_token %}
+
+                <!-- Display form errors -->
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <!-- Display field-specific errors -->
+                {% for field in form %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger">
+                            <p>{{ field.errors.as_text }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
                 <h1>Register</h1>
                 <!-- <div class="user-input">
                     <input type="text" id="id_name"  class="login-field" name="name" placeholder="Username" required>
@@ -33,15 +42,15 @@
                     <input type="password" id="id_password1" class="login-field" name="password" placeholder="Enter a Password" required>
                     <i class="bi bi-lock-fill icon2"></i>
                 </div>
-                <div class="user-input">
-                    <input type="password" id="id_password2" class="login-field" name="password_2" placeholder="Confirm Password" required>
-                    <i class="bi bi-lock-fill icon2"></i>
-                </div>
                 {% if form.password.errors %}
                     <div class="alert alert-danger">
                         {{ form.password.errors }}
                     </div>
                 {% endif %}
+                <div class="user-input">
+                    <input type="password" id="id_password2" class="login-field" name="password_2" placeholder="Confirm Password" required>
+                    <i class="bi bi-lock-fill icon2"></i>
+                </div>
                 {% if form.password_2.errors %}
                     <div class="alert alert-danger">
                         {{ form.password_2.errors }}

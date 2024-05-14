@@ -11,31 +11,6 @@ from .models import User
 # from django.contrib.auth.forms import UserCreationForm
 
 
-# def login_user(request):
-#     # form = LoginForm(request.POST or None)
-#     # context = {"form": form}
-
-#     # next_ = request.GET.get('next')
-#     # next_post = request.POST.get('next')
-#     # redirect_path = next_ or next_post or None
-#     if request.method == "POST":
-#         email = request.POST["email"]
-#         password = request.POST["password"]
-#         user = authenticate(request, email=email, password=password)
-#         if user is not None:
-#             login(request, user)
-#             messages.success(request, ("Welcome! You have successfully logged in."))
-#             return redirect('home')
-           
-#         else:
-#             messages.error(request, ("Error Logging In. Please Try Again..."))
-#             return redirect('user_auth:login')
-
-#     else:
-#         return render(request, 'userauths/login.html')
-
-
-
 def login_user(request):
     if request.method == "POST":
         email = request.POST["email"]
@@ -43,7 +18,7 @@ def login_user(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, ("Welcome! You have successfully logged in."))
+            messages.success(request, (f"Welcome! {email} \nYou have successfully logged in."))
             return redirect('home')
            
         else:
@@ -71,10 +46,12 @@ class RegisterView(CreateView):
         response = super().form_valid(form)
         user = form.save()
         login(self.request, user)
-        messages.success(self.request, f"Welcome {user.email}")
+        messages.success(self.request, f"Welcome {user.email}!")
         return response
 
-
+    def form_invalid(self, form):
+        # messages.success(self.request, "The password do not match. Please try again.")
+        return super().form_invalid(form)
 
 # # ORIGINAL
 # def register_user(request):

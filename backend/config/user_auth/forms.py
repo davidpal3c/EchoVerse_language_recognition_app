@@ -24,15 +24,22 @@ class RegisterForm(forms.ModelForm):
         password = cleaned_data.get("password")
         password_2 = cleaned_data.get("password_2")
         if password is not None and password != password_2:
-            self.add_error("password_2", "Your passwords must match")
+            self.add_error("password_2", "Your passwords must match!")
         return cleaned_data
+
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not email:
+            raise ValueError("Email is required.")
+        return email
+
 
     def save(self, commit=True):
         # Save the provided password in hashed format
         user = super(RegisterForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password"])
-        # user.active = False           # send confirmation email
-
+        # user.active = False           # send confirmation email <<<<
         if commit:
             user.save()
         return user

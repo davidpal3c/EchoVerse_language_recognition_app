@@ -27,7 +27,7 @@ decompose("echoverse");
 
 
 
-// Function to message element after a delay
+// Function to hide message element after a delay
 
 function hideMessage() {
     var element = document.getElementById('msg');
@@ -39,8 +39,51 @@ function hideMessage() {
     }
 }
 
-let delayInMilliseconds = 3300;
+let delayInMilliseconds = 3400;
 setTimeout(hideMessage, delayInMilliseconds);
+
+
+
+// Password validation & error message creation
+
+// function confirmPassword(password1, password2, mainsection) {
+//     let errorDiv = document.getElementById('password-error-message');
+
+//     // Remove any existing error message
+//     if (errorDiv) {
+//         errorDiv.remove();
+//     }
+
+//     // Check if passwords match
+//     if (password1.value !== password2.value) {
+//         // Create error message element
+//         let errorMessage = document.createElement('div');
+//         errorMessage.setAttribute('id', 'password-error-message');
+//         errorMessage.setAttribute('class', 'msg-box');
+
+//         let errorText = document.createElement('p');
+//         errorText.textContent = 'Passwords entered must match.';
+//         errorMessage.appendChild(errorText);
+
+//         // Insert error message before password2 input
+//         mainsection.parentNode.insertBefore(errorMessage, password2.nextSibling);
+//     }
+// }
+
+// let mainsection = document.getElementById('app-container');
+// let password1 = document.getElementById('id_password1');
+// let password2 = document.getElementById('id_password2');
+// let form = document.getElementById('reg-form');
+
+// // Add event listener to form submit
+// form.addEventListener('submit', function(event) {
+//     event.preventDefault(); // Prevent form submission
+
+//     // Call confirmPassword to check passwords
+//     confirmPassword(password1, password2, mainsection);
+// });
+
+
 
 
 
