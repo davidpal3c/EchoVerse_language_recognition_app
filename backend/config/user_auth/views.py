@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_protect
 from .forms import RegisterForm, LoginForm
 from django.views.generic import CreateView, FormView
 
@@ -29,7 +31,6 @@ def login_user(request):
         return render(request, 'userauths/login.html')
 
 
-
 def logout_user(request):
     logout(request)
     messages.success(request, ("You Were Logged Out."))
@@ -41,45 +42,28 @@ class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'userauths/register.html'
     success_url = '/'
+    success_url = reverse_lazy('home')
+
 
     def form_valid(self, form):
+        password = form.cleaned_data['password']
+        password_2 = form.cleaned_data['password_2']
+        
+        if password != password_2:
+            messages.success(self.request, "The passwords do not match. Please try again.")
+            # form.add_error(None, "The passwords do not match. Please try again.")
+            return self.form_invalid(form)
+
         response = super().form_valid(form)
         user = form.save()
         login(self.request, user)
         messages.success(self.request, f"Welcome {user.email}!")
         return response
 
+
     def form_invalid(self, form):
         # messages.success(self.request, "The password do not match. Please try again.")
         return super().form_invalid(form)
-
-# # ORIGINAL
-# def register_user(request):
-#     form = RegisterForm(request.POST or None)
-#     context = {"form": form}
-
-#     if form.is_valid():
-#         form.save()
-
-#     return render(request, 'userauths/register.html', context)
-
-#     if request.method == "POST":
-#         form = RegistrationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save(commit=False)
-#             user.set_password(form.cleaned_data['password'])
-#             user.save()
-
-#             login(request, user)
-#             messages.success(request, ("Registration Successful!"))
-#             return redirect('home')
-        
-#     else:  
-#         form = RegistrationForm()
-
-#     return render(request, 'userauths/register.html', {
-#         'form':form,
-#     })
 
 
 

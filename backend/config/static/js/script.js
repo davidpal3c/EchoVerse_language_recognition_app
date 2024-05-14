@@ -33,14 +33,26 @@ function hideMessage() {
     var element = document.getElementById('msg');
     if (element) {
         element.classList.add('hidden');
-        setTimeout(function() {
-            element.style.display = 'none';
-        }, 500);
+        // setTimeout(function() {
+        //     element.style.display = 'none';
+        // }, 500);
     }
-}
+};
 
-let delayInMilliseconds = 3400;
+
+function hideRegMessage() {
+    var elements = document.getElementsByClassName('errorlist');
+    if (elements.length > 0) {
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].classList.add('hidden');
+        }
+    }
+};
+
+
+let delayInMilliseconds = 4000;
 setTimeout(hideMessage, delayInMilliseconds);
+setTimeout(hideRegMessage, delayInMilliseconds);
 
 
 
