@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'core',
     'user_auth',
     'corsheaders',
+    'payment',
     # 'django-frontend',
 ]
 

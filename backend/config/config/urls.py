@@ -25,8 +25,8 @@ urlpatterns = [
     path('', include('core.urls')),
     path('members/', include('user_auth.urls', namespace='user_auth')),
     path('members/', include('django.contrib.auth.urls')),
+    path('payment/', include('payment.urls')),
 
-   
     # path('home', include('core.urls')),
        
     # #set prebuild url to automatically do login-logout-password reset: 
