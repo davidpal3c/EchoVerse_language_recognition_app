@@ -1,19 +1,21 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+
 from django.urls import reverse_lazy
-from .forms import RegisterForm, LoginForm
-from django.views.generic import CreateView, FormView
+from .forms import RegisterForm
+
+from django.contrib.messages import get_messages
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 import json
-
-
-
 
 from .models import User
 
 
-# from django.contrib.auth.forms import UserCreationForm
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 def login_user(request):
@@ -24,21 +26,11 @@ def login_user(request):
         if user is not None:
             login(request, user)
             messages.success(request, (f"Welcome! {email} \nYou have successfully logged in."))
-            return redirect('home')
-           
+            return JsonResponse({'redirect': 'home'})
         else:
             messages.error(request, ("Error Logging In. Please Try Again..."))
-            return redirect('user_auth:login')
-
-    else:
-        return render(request, 'userauths/login.html')
-
-
-def logout_user(request):
-    logout(request)
-    messages.success(request, ("You Were Logged Out."))
-    return redirect('home')
-
+            return JsonResponse({'error': 'Error Logging In. Please Try Again...'}, status=400)
+    return render(request, 'userauths/login.html')
 
 def register_user(request):
     if request.method == "POST":
@@ -47,12 +39,81 @@ def register_user(request):
             user = form.save()
             login(request, user)
             messages.success(request, f"Welcome {user.email}!")
-            return redirect(reverse_lazy('home'))
+            return JsonResponse({'redirect': 'home'})
         else:
             messages.error(request, "Registration failed. Please try again.")
+            return JsonResponse({'error': 'Registration failed. Please try again.'}, status=400)
     else:
         form = RegisterForm()
     return render(request, 'userauths/register.html', {'form': form})
+
+# @csrf_exempt
+# def ajax_auth(request):
+#     if request.method == 'POST':
+#         data = json.loads(request.body)
+#         action = data.get('action')
+#         email = data.get('email')
+#         password = data.get('password')
+
+#         if action == 'login':
+#             user = authenticate(request, email=email, password=password)
+#             if user is not None:
+#                 login(request, user)
+#                 return JsonResponse({'status': 'success', 'message': 'Logged in'})
+#             else:
+#                 return JsonResponse({'status': 'error', 'message': 'Invalid credentials'})
+
+#         elif action == 'register':
+#             form = RegisterForm(data)
+#             if form.is_valid():
+#                 user = form.save()
+#                 login(request, user)
+#                 return JsonResponse({'status': 'success', 'message': 'Registered and logged in'})
+#             else:
+#                 errors = form.errors.as_json()
+#                 return JsonResponse({'status': 'error', 'errors': errors})
+
+#     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
+
+
+# def login_user(request):
+#     if request.method == "POST":
+#         email = request.POST["email"]
+#         password = request.POST["password"]
+#         user = authenticate(request, email=email, password=password)
+#         if user is not None:
+#             login(request, user)
+#             messages.success(request, (f"Welcome! {email} \nYou have successfully logged in."))
+#             return redirect('home')
+           
+#         else:
+#             messages.error(request, ("Error Logging In. Please Try Again..."))
+#             return redirect('user_auth:login')
+
+#     else:
+#         return render(request, 'userauths/login.html')
+
+
+def logout_user(request):
+    logout(request)
+    messages.success(request, ("You Were Logged Out."))
+    return redirect('home')
+
+
+# def register_user(request):
+#     if request.method == "POST":
+#         form = RegisterForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             login(request, user)
+#             messages.success(request, f"Welcome {user.email}!")
+#             return redirect(reverse_lazy('home'))
+#         else:
+#             messages.error(request, "Registration failed. Please try again.")
+#     else:
+#         form = RegisterForm()
+#     return render(request, 'userauths/register.html', {'form': form})
 
 
 

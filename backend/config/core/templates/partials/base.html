@@ -16,53 +16,201 @@
         <link rel="stylesheet" type="text/css" href="{% static '/styles/main.css' %}">
         <!-- scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
 
     </head>
     <body>
-        <header class="header">
-            <a class="logo-title" id="echoverse" href="{% url 'home' %}" target="_self">EchoVerse</a>
-            <img src="" alt="" class="logo-img">
-
-            <input type="checkbox" id="check">
-            <label for="check" class="menu-icon">
-                <i class="bx bx-menu" id="menu-icon"></i>
-                <i class="bx bx-x" id="close-icon"></i>
-            </label>
+        <div id="app">
             
-            <nav class="navbar">
-                <a href="{% url 'home' %}" style="--i:0;" class="word home">Home</a>
-                <a href="{% url 'about' %}" style="--i:2;" class="word about">About</a>
-                <a href="{% url 'payment:donate' %}" style="--i:2;" class="word about">Donate</a>            
-                {% if user.is_authenticated  %}
-                    <a href="{% url 'user_auth:logout' %}" style="--i:1;" class="word login">Logout</a>
-                {% else %}
-                    <a href="{% url 'user_auth:login' %}" style="--i:1;" class="word logout">Login</a>
-                    <a href="{% url 'user_auth:register_user' %}" style="--i:1;" class="word register-user">Register</a>
-                {% endif %} 
-            </nav>
+            <div id="app">
+                <header class="header">
+                    <a class="logo-title" id="echoverse" href="{% url 'home' %}" target="_self">EchoVerse</a>
+                    <img src="" alt="" class="logo-img">
+        
+                    <input type="checkbox" id="check">
+                    <label for="check" class="menu-icon">
+                        <i class="bx bx-menu" id="menu-icon"></i>
+                        <i class="bx bx-x" id="close-icon"></i>
+                    </label>
+                    
+                    <nav class="navbar">
+                        <a href="{% url 'home' %}" style="--i:0;" class="word home">Home</a>
+                        <a href="{% url 'about' %}" style="--i:2;" class="word about">About</a>
+                        <a href="{% url 'payment:donate' %}" style="--i:2;" class="word about">Donate</a>            
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'user_auth:logout' %}" style="--i:1;" class="word login">Logout</a>
+                        {% else %}
+                            <a href="javascript:void(0)" @click="openModal(true)" style="--i:1;" class="word logout">Login</a>
+                            <a href="javascript:void(0)" @click="openModal(false)" style="--i:1;" class="word register-user">Register</a>
+                        {% endif %}
+                    </nav>
+                </header>  
 
-        </header>
+            <div class="msg-box" id="msg">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
 
-        <div class="msg-box" id="msg">
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li class="{{ message.tags }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
+
+            {% block content %}
+
+            {% endblock content %}
+
+            <footer class="footer">
+                <p>Copyright, Author and Contact email</p>
+            </footer>
+
+            <!-- modal component -->
+            <div class="main-modal-box" id="auth-modal" v-if="showModal" @click.self="closeModal">
+                <div class="user-auth-box">
+                    <div class="modal-content rAuth-box">
+                        <span class="close" @click="closeModal">&times;</span>                    
+
+                            <div v-if="isLogin">
+                                <h1>Login</h1>
+                                <form @submit.prevent="submitLogin">
+                                    <div class="user-input">
+                                        <input type="text" v-model="loginForm.email" class="login-field" name="email" placeholder="Email" required>
+                                        <i class="bi bi-person-fill icon2"></i>
+                                    </div>  
+                                        
+                                    <div class="user-input">
+                                        <input type="password" v-model="loginForm.password" class="login-field" name="password" placeholder="Password" required>
+                                        <i class="bi bi-lock-fill icon2"></i>
+                                    </div>
+                                    
+                                    <div class="remember-forgot">
+                                        <div class="checkbox-wrapper-2">
+                                            <label for=""><input type="checkbox" class="sc-gJwTLC ikxBAC">Remember me.</label>
+                                        </div>
+                                        <a href="#">Forgot Password?</a>
+                                    </div>
+
+                                    <button type="submit" class="login-btn">Login</button>
+
+                                    <div class="register-link">
+                                        <p>Don't have an account? <a href="{% url 'user_auth:register_user' %}">Register</a></p>
+                                    </div>
+                                </form>
+                                <hr>
+                                <div class="oauth-box">
+                                    <div class="oauth-login-btn">
+                                        <button class="btn btn-primary" type="submit"><i class="bi bi-google"> Sign in with Google</i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div v-if="!isLogin">
+                                <form @submit.prevent="submitRegister">
+                                    <h1>Register</h1>
+                                
+                                    <div class="user-input">
+                                        <input type="email" v-model="registerForm.email" id="id_email"  class="login-field" placeholder="Email" required>
+                                        <i class="bi bi-person-fill icon2"></i>
+                                    </div>
+
+                                    <div class="user-input">
+                                        <input type="password" v-model="registerForm.password" id="id_password1" class="login-field" placeholder="Password" required>
+                                        <i class="bi bi-lock-fill icon2"></i>
+                                    </div>
+
+                                    <div class="user-input" >
+                                        <input type="password" v-model="registerForm.password_2" id="id_password2" class="login-field" placeholder="Confirm Password" required>
+                                        <i class="bi bi-lock-fill icon2"></i>
+                                    </div>
+
+                                    <button type="submit" class="login-btn" >Sign-Up</button>
+                                    <div class="register-link">
+                                        <p>Already have an account? <a href="{% url 'user_auth:login' %}">Login</a></p><br>
+                                    </div>
+                                    
+                                    {% if form.non_field_errors %}
+                                        <div class="errorlist">
+                                            {% for error in form.non_field_errors %}
+                                                <p>{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                    
+                                    {% for field in form %}
+                                        {% if field.errors %}
+                                            <div class="errorlist">
+                                                <p>{{ field.errors.as_text }}</p>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </form>
+                            </div>
+
+                    </div>
+                </div>    
+            </div>
         </div>
-
-
-        {% block content %}
-
-        {% endblock content %}
-
-        <footer class="footer">
-            <p>Copyright, Author and Contact email</p>
-        </footer>
         <script src="{% static '/js/main.js' %}" async defer></script>
+        <script src="{% static '/js/vue-auth-modal.js' %}"></script>
     </body>
 </html>
+
+
+<!-- <div id="auth-modal" class="user-auth-box" v-if="showModal" @click.self="closeModal" >
+    <div class="modal-content rAuth-box">
+        <span class="close" @click="closeModal">&times;</span>
+
+                    <div v-if="isLogin">
+                        <h1>Login</h1>
+                        <form @submit.prevent="submitLogin">
+                            <input type="text" v-model="loginForm.email" placeholder="Email" required>
+                            <input type="password" v-model="loginForm.password" placeholder="Password" required>
+                            <button type="submit">Login</button>
+                        </form>
+                    </div>
+                    <div v-if="!isLogin">
+                        <form @submit.prevent="submitRegister">
+                            <h1>Register</h1>
+                           
+                            <div class="user-input">
+                                <input type="email" v-model="registerForm.email" id="id_email"  class="login-field" placeholder="Email" required>
+                            </div>
+
+                            <div class="user-input">
+                                <input type="password" v-model="registerForm.password" id="id_password1" class="login-field" placeholder="Password" required>
+                            </div>
+
+                            <div class="user-input">
+                                <input type="password" v-model="registerForm.password_2" id="id_password2" class="login-field" placeholder="Confirm Password" required>
+                            </div>
+
+                            <button type="submit" class="login-btn">Sign-Up</button>
+                            <div class="register-link">
+                                <p>Already have an account? <a href="{% url 'user_auth:login' %}">Login</a></p><br>
+                            </div>
+                            
+                            {% if form.non_field_errors %}
+                                <div class="errorlist">
+                                    {% for error in form.non_field_errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+            
+                            {% for field in form %}
+                                {% if field.errors %}
+                                    <div class="errorlist">
+                                        <p>{{ field.errors.as_text }}</p>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </form>
+                    </div>
+                <!-- </div>
+            </div> -->
+            
+        </div>
+    </div>
+</div> -->

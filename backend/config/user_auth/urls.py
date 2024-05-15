@@ -8,6 +8,7 @@ urlpatterns = [
     path("login", views.login_user, name="login"),
     path("logout", views.logout_user, name="logout"),
     path("register", views.register_user, name="register_user"),
+    # path('ajax/auth/', views.ajax_auth, name='ajax-auth'),
 
     # path("register", views.RegisterView.as_view(), name="register_user"),
 

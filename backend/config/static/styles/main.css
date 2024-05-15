@@ -285,10 +285,9 @@ transform: translate(78%, 50%) rotate(-16deg);
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid white; */
-    /* margin-top: 3rem; */
     height: 60vh;  
     padding-bottom: 8rem;
+    margin-top: 12rem;
 }
 
 
@@ -606,8 +605,9 @@ footer p {
     backdrop-filter: blur(25px);  
     box-shadow: 0 0 1.3rem var(--second-btn-color);
     border-radius: 0.9rem;
-    height: 27rem;
+    height: 28rem;
     margin-top: 4rem;
+    margin-bottom: 7rem;
     width: 23rem;
     display: flex;
     flex-direction: column;
@@ -615,6 +615,15 @@ footer p {
     align-items: center;
 
 }
+
+/* modal alignment */
+.user-auth-box form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .rAuth-box {
     /* border: 1px solid var(--border); */
@@ -630,10 +639,12 @@ footer p {
     align-items: center;
 }
 
+.user-auth-box h1,
 .rAuth-box h1 {
     text-align: center;
     color: var(--second-text-color);
-    margin-bottom: 1rem;
+    margin-top: -.5rem;
+    margin-bottom: 1.6rem;
 }
 
 .user-input {
@@ -738,13 +749,15 @@ footer p {
 }
 
 .checkbox-wrapper-2 .ikxBAC:hover {
-    background-color: #c9cbcd;
+    background-color: var(--third-text-color);
+    box-shadow: 0 0 1rem var(--second-btn-color);
     transition-duration: 0s;
-    transition: 0.7s ease;
+    transition: 0.6s ease;
 }
 
 .checkbox-wrapper-2 .ikxBAC:checked {
-    background-color: #6e79d6;
+    background-color: var(--second-btn-color);
+    box-shadow: 0 0 1rem var(--second-btn-color);
     transition: 0.2s ease;
 }
 
@@ -758,7 +771,7 @@ footer p {
 }
 
 .checkbox-wrapper-2 .ikxBAC:checked:hover {
-    background-color: #535db3;
+    background-color: var(--second-btn-color);
     transition: 0.2s ease;
 }
 
@@ -790,6 +803,8 @@ footer p {
     color: var(--second-text-color);
 }
 
+
+
 .rAuth-box button {
     border: 1.5px solid var(--border);
     background-color: var(--third-text-color);
@@ -799,8 +814,8 @@ footer p {
     text-decoration: none;
     transition: 0.8s ease;
     color:black;
-    margin-top: 0.2rem;
-    margin-bottom: 0.7rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.8rem;
 }
 
 .rAuth-box button:hover {
@@ -812,13 +827,13 @@ footer p {
     text-decoration: none;
     transition: 0.8s ease;
     color:black;
-    margin-top: 0.2rem;
-    margin-bottom: 0.7rem;
+    margin-top: 0.3rem; 
+    margin-bottom: 0.8rem; 
 }
 
 
 .user-auth-box hr {
-    margin-top: 1rem;
+    margin-top: 0.4rem;
     border: 0.05rem solid var(--border);
 }
 
@@ -830,7 +845,8 @@ footer p {
     padding: 0.4rem;
     background-color: #4285F4;
     color: var(--second-text-color);
-    margin-top: .6rem;
+    margin-top: 1rem;
+    margin-left: 4.5rem;
     cursor: pointer;
     transition: 0.7s ease;
 }
@@ -840,7 +856,7 @@ footer p {
     padding: 0.4rem;
     background-color: var(--second-text-color);
     color: #4285F4;
-    margin-top: .6rem;
+    margin-top: 0.9rem;
     cursor: pointer;
     transition: 0.7s ease;
 }
@@ -909,7 +925,6 @@ footer p {
     margin-top: 1rem;
 }
 
-
 .errorlist p{ 
     height:0.1rem;
     width: 100%;
@@ -920,3 +935,53 @@ footer p {
 .echo-container .main-text {
     color: var(--second-text-color);
 }
+
+
+/* modal component */
+/* .main-modal-box {
+    
+} */
+
+
+/* Modal Background */
+#auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(0, 0, 0, 0.3); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; 
+}
+
+
+/* Modal Content */
+#auth-modal .modal-content {
+    position: relative;
+    z-index: 1003;
+}
+
+/* Close Button */
+
+
+
+#auth-modal .close {
+    color: var(--third-text-color);
+    padding: .5rem 1rem 0 0;
+    position: absolute;
+    top: -30px;
+    right: -10px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1005; 
+}
+
+/* Adjust the z-index of the header to be above the modal */
+header {
+    z-index: 1002; /* Ensure header is above modal */
+    position: relative; /* Ensure header has a position context */
+}
+
