@@ -95,7 +95,7 @@
                                     <button type="submit" class="login-btn">Login</button>
 
                                     <div class="register-link">
-                                        <p>Don't have an account? <a href="{% url 'user_auth:register_user' %}">Register</a></p>
+                                        <p>Don't have an account? <a href="javascript:void(0)" @click="openModal(false)" class="word register-user" >Register</a></p>
                                     </div>
                                 </form>
                                 <hr>
@@ -127,7 +127,7 @@
 
                                     <button type="submit" class="login-btn" >Sign-Up</button>
                                     <div class="register-link">
-                                        <p>Already have an account? <a href="{% url 'user_auth:login' %}">Login</a></p><br>
+                                        <p>Already have an account? <a href="javascript:void(0)" @click="openModal(true)" class="word logout">Login</a></p><br>
                                     </div>
                                     
                                     {% if form.non_field_errors %}
