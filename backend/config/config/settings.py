@@ -54,8 +54,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'config.urls'
+CSRF_COOKIE_NAME = 'csrftoken'
 
+
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {

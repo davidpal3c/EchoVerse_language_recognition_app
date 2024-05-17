@@ -1,81 +1,88 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.messages import get_messages
 
 from django.urls import reverse_lazy
 from .forms import RegisterForm
 
-from django.contrib.messages import get_messages
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 import json
 
-from .models import User
+# from .models import User
 
 
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-import json
-
-
+@csrf_protect
 def login_user(request):
     if request.method == "POST":
-        email = request.POST["email"]
-        password = request.POST["password"]
-        user = authenticate(request, email=email, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, (f"Welcome! {email} \nYou have successfully logged in."))
-            return JsonResponse({'redirect': 'home'})
-        else:
-            messages.error(request, ("Error Logging In. Please Try Again..."))
-            return JsonResponse({'error': 'Error Logging In. Please Try Again...'}, status=400)
-    return render(request, 'userauths/login.html')
+        csrf_token = request.POST.get('csrfmiddlewaretoken')
+        print(f"CSRF Token in POST request: {csrf_token}")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
 
+        print(f"Attempting login with email: {email} and password: {password}")    # debugging log
+
+        user = authenticate(request, email=email, password=password)
+
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            if user is not None:
+                login(request, user)
+                return JsonResponse({'success': True, 'redirect': '/home/'})
+            else:
+                errors = {"error": "Error Logging In. Please Try Again..."}
+                return JsonResponse({'success': False, 'errors': errors})
+        else:
+            if user is not None:
+                login(request, user)
+                messages.success(request, f"Welcome! {email} \nYou have successfully logged in.")
+                return redirect('home')
+            else:
+                messages.error(request, "Error Logging In. Please Try Again...")
+                return redirect('user_auth:login')
+    else:
+        return render(request, 'userauths/login.html')
+
+
+@csrf_protect
 def register_user(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            messages.success(request, f"Welcome {user.email}!")
-            return JsonResponse({'redirect': 'home'})
+
+        print(f"Register form data: {request.POST}")  # Debugging log
+
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            if form.is_valid():
+                user = form.save()
+                login(request, user)
+                return JsonResponse({'success': True, 'redirect': '/home/'})
+            else:
+                errors = form.errors.as_json()
+                return JsonResponse({'success': False, 'errors': json.loads(errors)})
         else:
-            messages.error(request, "Registration failed. Please try again.")
-            return JsonResponse({'error': 'Registration failed. Please try again.'}, status=400)
+            if form.is_valid():
+                user = form.save()
+                login(request, user)
+                messages.success(request, f"Welcome {user.email}!")
+                return redirect(reverse_lazy('home'))
+            else:
+                for field in form:
+                    for error in field.errors:
+                        messages.error(request, f"{field.label}: {error}")
+                return redirect('user_auth:register')
+                return redirect(reverse_lazy('user_auth:register'))
     else:
         form = RegisterForm()
     return render(request, 'userauths/register.html', {'form': form})
 
-# @csrf_exempt
-# def ajax_auth(request):
-#     if request.method == 'POST':
-#         data = json.loads(request.body)
-#         action = data.get('action')
-#         email = data.get('email')
-#         password = data.get('password')
-
-#         if action == 'login':
-#             user = authenticate(request, email=email, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 return JsonResponse({'status': 'success', 'message': 'Logged in'})
-#             else:
-#                 return JsonResponse({'status': 'error', 'message': 'Invalid credentials'})
-
-#         elif action == 'register':
-#             form = RegisterForm(data)
-#             if form.is_valid():
-#                 user = form.save()
-#                 login(request, user)
-#                 return JsonResponse({'status': 'success', 'message': 'Registered and logged in'})
-#             else:
-#                 errors = form.errors.as_json()
-#                 return JsonResponse({'status': 'error', 'errors': errors})
-
-#     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+def logout_user(request):
+    logout(request)
+    messages.success(request, "You Were Logged Out.")
+    return redirect('home')
 
 
+
+# >>> WORKING ORIGINAL
 
 # def login_user(request):
 #     if request.method == "POST":
@@ -93,12 +100,6 @@ def register_user(request):
 
 #     else:
 #         return render(request, 'userauths/login.html')
-
-
-def logout_user(request):
-    logout(request)
-    messages.success(request, ("You Were Logged Out."))
-    return redirect('home')
 
 
 # def register_user(request):

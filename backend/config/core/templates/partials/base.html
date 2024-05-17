@@ -9,6 +9,8 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
+        <!-- meta for csrf tokens-->
+        <meta name="csrf-token" content="{{ csrf_token }}">
         <!-- box icons -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
@@ -16,11 +18,17 @@
         <link rel="stylesheet" type="text/css" href="{% static '/styles/main.css' %}">
         <!-- scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
     </head>
     <body>
+        <script>
+            window.authUrls = {
+                login: "{% url 'user_auth:login' %}",
+                register: "{% url 'user_auth:register_user' %}"
+            };
+        </script>
+
         <div id="app">
             
             <div id="app">
@@ -68,13 +76,13 @@
 
             <!-- modal component -->
             <div class="main-modal-box" id="auth-modal" v-if="showModal" @click.self="closeModal">
-                <div class="user-auth-box">
+                <div class="user-auth-box" id="auth-modal-box">
                     <div class="modal-content rAuth-box">
                         <span class="close" @click="closeModal">&times;</span>                    
 
                             <div v-if="isLogin">
                                 <h1>Login</h1>
-                                <form @submit.prevent="submitLogin">
+                                <form id="login-Form" @submit.prevent="submitLogin">
                                     <div class="user-input">
                                         <input type="text" v-model="loginForm.email" class="login-field" name="email" placeholder="Email" required>
                                         <i class="bi bi-person-fill icon2"></i>
@@ -152,8 +160,12 @@
                 </div>    
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="{% static '/js/main.js' %}" async defer></script>
+        <!-- <script src="{% static '/js/authUrls-global.js' %}" async defer></script> -->
         <script src="{% static '/js/vue-auth-modal.js' %}"></script>
+        
     </body>
 </html>
 
