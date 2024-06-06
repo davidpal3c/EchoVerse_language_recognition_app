@@ -90,11 +90,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
     'ENGINE':'django.db.backends.postgresql',
-    'NAME': os.getenv('DB_NAME'),
-    'USER': os.getenv('DB_USER'),
-    'PASSWORD': os.getenv('DB_PASSWORD'),
-    'HOST': os.getenv('DB_HOST'),
-    'PORT': os.getenv('DB_PORT'),
+    'NAME': os.getenv('PGDATABASE'),
+    'USER': os.getenv('PGUSER'),
+    'PASSWORD': os.getenv('PGPASSWORD'),
+    'HOST': os.getenv('PGHOST'),
+    'PORT': os.getenv('PGPORT'),
     }
 }
 
@@ -138,7 +138,7 @@ STYLES_DIR = os.path.join(STATIC_PROJECT_DIR, 'styles')
 # url prefix for static files
 STATIC_URL = '/static/'
 
-# Defines the directory where Django will collect static files during production
+# Defines the directory where Django     will collect static files during production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
