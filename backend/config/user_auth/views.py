@@ -10,17 +10,23 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 import json
 
+
+
 # from .models import User
 
 
 @csrf_protect
 def login_user(request):
     if request.method == "POST":
-        csrf_token = request.POST.get('csrfmiddlewaretoken')
+        data = json.loads(request.body)
+        csrf_token = data.get('csrfmiddlewaretoken')
+        
         print(f"CSRF Token in POST request: {csrf_token}")
-        email = request.POST.get("email")
-        password = request.POST.get("password")
 
+        email = data.get("email")
+        password = data.get("password")
+
+        # print(request.headers)
         print(f"Attempting login with email: {email} and password: {password}")    # debugging log
 
         user = authenticate(request, email=email, password=password)
@@ -30,18 +36,19 @@ def login_user(request):
                 login(request, user)
                 return JsonResponse({'success': True, 'redirect': '/home/'})
             else:
-                errors = {"error": "Error Logging In. Please Try Again..."}
+                errors = "Error Logging In. Please Try Again..."
                 return JsonResponse({'success': False, 'errors': errors})
         else:
             if user is not None:
                 login(request, user)
                 messages.success(request, f"Welcome! {email} \nYou have successfully logged in.")
-                return redirect('home')
+                return JsonResponse({'succes': True, 'redirect': '/home/'})
             else:
                 messages.error(request, "Error Logging In. Please Try Again...")
-                return redirect('user_auth:login')
+                return JsonResponse({'success': False, 'errors': "Error Logging In. Please Try Again..."})
+    
     else:
-        return render(request, 'userauths/login.html')
+        return render(request, 'home')
 
 
 @csrf_protect
@@ -70,10 +77,11 @@ def register_user(request):
                     for error in field.errors:
                         messages.error(request, f"{field.label}: {error}")
                 return redirect('user_auth:register')
-                return redirect(reverse_lazy('user_auth:register'))
+                # return redirect(reverse_lazy('user_auth:register'))
     else:
         form = RegisterForm()
     return render(request, 'userauths/register.html', {'form': form})
+
 
 def logout_user(request):
     logout(request)

@@ -1,8 +1,10 @@
 // Vue instance managing:
 
 // setting X-CSRFToken header globally for Axios (automatic inclusion)
-axios.defaults.headers.common['X-CSRFToken'] = window.csrfToken;
-
+// document.addEventListener('DOMContentLoaded', function() {
+//     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+//     axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
+// });
 
 new Vue({
     el: '#app',
@@ -18,17 +20,10 @@ new Vue({
             email: '',
             password: '',
             password_2: ''
-        }
-    },
-    created() {
-        this.setCsrfToken();
+        },
+        csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     },
     methods: {
-        setCsrfToken() {
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            console.log("CSRF Token:", csrfToken);  
-            axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
-        },
         openModal(isLogin) {
             this.isLogin = isLogin;
             this.showModal = true;
@@ -37,41 +32,60 @@ new Vue({
             this.showModal = false;
         },
         submitLogin() {
-            axios.post(window.authUrls.login, this.loginForm)
-                .then(response => {
-                    if (response.data.success) {
-                        window.location.href = response.data.redirect;
-                    } else {
-                        this.errors = response.data.errors;
-                    }
-                })
-                .catch(error => {
-                    if (error.response) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        console.error('Error:', error);
-                    }
-                });
+            axios.post('/members/login/', {
+                email: this.loginForm.email,
+                password: this.loginForm.password, 
+                csrfmiddlewaretoken: this.token 
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requeste-With': 'XMLHttpRequest',
+                }
+            })
+            .then(response => {
+                if (response.data.success) {
+                    window.location.href = response.data.redirect;
+                } else {
+                    this.errors = response.data.errors;
+                }
+            })
+            .catch(error => {
+                if (error.response) {
+                    this.errors = error.response.data.errors;
+                } else {
+                    console.error('Error:', error);
+                }
+            });
         },
         submitRegister() {
-            axios.post(window.authUrls.register, this.registerForm)
-                .then(response => {
-                    if (response.data.success) {
-                        window.location.href = response.data.redirect;
-                    } else {
-                        this.errors = response.data.errors;
-                    }
-                })
-                .catch(error => {
-                    if (error.response) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        console.error('Error:', error);
-                    }
-                });
+            axios.post('/members/register/', {
+                ...this.registerForm,
+                csrfmiddlewaretoken: this.csrfToken       //csrf token added in the request payload (JSON)
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requeste-With': 'XMLHttpRequest',
+                }
+            })
+            .then(response => {
+                if (response.data.success) {
+                    window.location.href = response.data.redirect;
+                } else {
+                    this.errors = response.data.errors;
+                }
+            })
+            .catch(error => {
+                if (error.response) {
+                    this.errors = error.response.data.errors;
+                } else {
+                    console.error('Error:', error);
+                }
+            });
+            console.log(this.csrfToken)
         }
     }
 });
+
 
 
 

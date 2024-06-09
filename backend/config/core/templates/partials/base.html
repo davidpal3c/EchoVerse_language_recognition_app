@@ -79,10 +79,10 @@
                 <div class="user-auth-box" id="auth-modal-box">
                     <div class="modal-content rAuth-box">
                         <span class="close" @click="closeModal">&times;</span>                    
-
                             <div v-if="isLogin">
                                 <h1>Login</h1>
-                                <form id="login-Form" @submit.prevent="submitLogin">
+                                <form id="login-Form" @submit.prevent="submitLogin" method="POST">
+                                    {% csrf_token %}
                                     <div class="user-input">
                                         <input type="text" v-model="loginForm.email" class="login-field" name="email" placeholder="Email" required>
                                         <i class="bi bi-person-fill icon2"></i>
@@ -115,7 +115,8 @@
                             </div>
 
                             <div v-if="!isLogin">
-                                <form @submit.prevent="submitRegister">
+                                <form @submit.prevent="submitRegister" method="POST">
+                                    {% csrf_token %}
                                     <h1>Register</h1>
                                 
                                     <div class="user-input">
