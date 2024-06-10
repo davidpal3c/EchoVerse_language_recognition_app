@@ -15,7 +15,7 @@ import json
 # from .models import User
 
 
-@csrf_protect
+@csrf_exempt
 def login_user(request):
     if request.method == "POST":
         data = json.loads(request.body)
@@ -51,7 +51,7 @@ def login_user(request):
         return render(request, 'home')
 
 
-@csrf_protect
+@csrf_exempt
 def register_user(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
