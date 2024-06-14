@@ -5,7 +5,7 @@ core App
 
     Contains main views, templates, and base functionalities (e.g., homepage, layout).
 
-  Speech_&_text Conversion App
+  Speech_&_Text Conversion App
 
     Handles speech-to-text functionality.
     Includes views for processing speech input.
