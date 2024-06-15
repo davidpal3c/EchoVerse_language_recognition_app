@@ -13,15 +13,19 @@ EchoVerse is a multifaceted platform designed to enhance communication and learn
     ~ Utilizes cutting-edge algorithms for accurate transcription.
 
 3. Text-to-Speech Conversion
-Translates written text into audible speech, facilitating easy listening and comprehension.
-Ideal for creating audio versions of documents, books, and educational materials.
-Dictionary Service
-Offers detailed word definitions, synonyms, and antonyms.
-Leverages external API integrations to ensure comprehensive and reliable lexical information.
-User Authentication
-Secure login, registration, and logout processes.
-Ensures user data protection and privacy.
-Getting Started
+    ~ Translates written text into audible speech, facilitating easy listening and comprehension.
+    ~ Ideal for creating audio versions of documents, books, and educational materials.
+
+4. Dictionary Service
+    ~ Offers detailed word definitions, synonyms, and antonyms.
+    ~ Leverages external API integrations to ensure comprehensive and reliable lexical information.
+
+5. User Authentication
+    ~ Secure login, registration, and logout processes.
+    ~ Ensures user data protection and privacy.
+
+
+# Getting Started
 To get EchoVerse up and running locally, follow these steps:
 
 Prerequisites
