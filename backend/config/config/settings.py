@@ -38,9 +38,7 @@ INSTALLED_APPS = [
 ]
 
 
-
 AUTH_USER_MODEL = 'user_auth.User'          # changes built-in user model to the custom user model
-
 
 
 MIDDLEWARE = [
