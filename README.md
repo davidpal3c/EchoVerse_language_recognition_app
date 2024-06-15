@@ -33,42 +33,61 @@ Ensure you have Python installed on your system. It's recommended to use a virtu
 
 Installation
 
-Clone the repository:
+1. Clone the repository:
+
    git clone https://your-repository-url.git
    cd echoverse
-Set up a virtual environment:
+   
+2. Set up a virtual environment:
+
    python -m venv env
    source env/bin/activate  # On Windows, use `env\Scripts\activate`
-Install dependencies:
+   
+3. Install dependencies:
    pip install -r requirements.txt
-Configure the database and other settings in config/settings.py.
-Apply migrations:
-   python manage.py migrate
-Start the development server:
-   python manage.py runserver
-Usage
-Speech-to-Text Conversion
-Navigate to the designated endpoint in your browser or use the provided UI to upload or record audio.
-The application processes the audio and displays the transcribed text.
-Text-to-Speech Conversion
-Input text via the dedicated interface.
-Receive an audio file generated from the input text for download or immediate playback.
-Dictionary Lookup
-Enter a word in the search bar to retrieve definitions, synonyms, and antonyms.
-Explore the extensive database powered by external dictionaries.
-User Authentication
-Register for a new account or log in to an existing one.
-Manage your profile and preferences securely.
-Contributing
-Contributions are welcome To contribute:
+   
+4. Configure the database and other settings in config/settings.py.
 
-Fork the repository.
-Create a feature branch: git checkout -b feature-name.
-Commit your changes: git commit -am 'Add some feature'.
-Push to the branch: git push origin feature-name.
-Open a Pull Request.
+5. Apply migrations:
+
+   python manage.py migrate
+
+6. Start the development server:
+   python manage.py runserver
+
+# Usage
+
+Speech-to-Text Conversion
+    * Navigate to the designated endpoint in your browser or use the provided UI to upload or record audio.
+    * The application processes the audio and displays the transcribed text.
+
+Text-to-Speech Conversion
+    * Input text via the dedicated interface.
+    * Receive an audio file generated from the input text for download or immediate playback.
+
+Dictionary Lookup
+    * Enter a word in the search bar to retrieve definitions, synonyms, and antonyms.
+    * Explore the extensive database powered by external dictionaries.
+
+User Authentication
+    * Register for a new account or log in to an existing one.
+    * Manage your profile and preferences securely.
+
+# Contributing
+Contributions are welcome:
+
+1. Fork the repository.
+2. Create a feature branch: git checkout -b feature-name.
+3. Commit your changes: git commit -am 'Add some feature'.
+4. Push to the branch: git push origin feature-name.
+5. Open a Pull Request.
+
 License
 Distributed under the MIT License. See LICENSE for more information.
+
+
+
+
 
 App Purposes
 core App
