@@ -1,7 +1,7 @@
 ﻿# EchoVerse
 
 Overview
-EchoVerse is a multifaceted platform designed to enhance communication and learning experiences through advanced speech-to-text and text-to-speech technologies, coupled with robust user authentication mechanisms and a rich dictionary service. Built with Django, it offers the integration of various functionalities aimed at making digital interactions more intuitive and accessible.
+EchoVerse is a multifaceted platform designed to enhance communication and learning experiences through advanced speech-to-text and text-to-speech technologies, coupled with robust user authentication mechanisms and a rich dictionary service. Built with Django, it offers seamless integration of various functionalities aimed at making digital interactions more intuitive and accessible.
 
 # Features
 
@@ -72,6 +72,8 @@ Dictionary Lookup
 User Authentication
     * Register for a new account or log in to an existing one.
     * Manage your profile and preferences securely.
+    * Store results and bookmarks.
+
 
 # Contributing
 Contributions are welcome:
