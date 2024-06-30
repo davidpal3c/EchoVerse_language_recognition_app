@@ -72,7 +72,7 @@ Dictionary Lookup
 User Authentication
     * Register for a new account or log in to an existing one.
     * Manage your profile and preferences securely.
-    * Store results and bookmarks.
+    * Store user results and bookmarks.
 
 
 # Contributing
