@@ -63,7 +63,7 @@ Speech-to-Text Conversion
 
 Text-to-Speech Conversion
     * Input text via the dedicated interface.
-    * Receive an audio file generated from the input text for download or immediate playback.
+    * Receive an audio file generated from the input text for download or immediate conversion.
 
 Dictionary Lookup
     * Enter a word in the search bar to retrieve definitions, synonyms, and antonyms.
